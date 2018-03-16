@@ -1,0 +1,12 @@
+#Pluign Messages:
+
+InvalidUsage: "&cUse Like: /freeze [Name] or /ss [Name]"
+NoPlayer: "&cThat player is offline!"
+NoFreeze: "&cYou can not freeze that player!"
+NoPermission: "(!) You don't have permission to use this command!"
+NoCommands: "&cYou can not use commands when frozen!"
+Frozen: "&cYou have been frozen!"
+UnFrozen: "&aYou have been unfrozen!"
+PlayerFrozen: "&e%target% &chas been frozen!"
+PlayerUnFrozen: "&e%target% &ahas been unfrozen!"
+PlayerLeft: "&6&lWARNING: &e%target% &cleft the server while frozen!"

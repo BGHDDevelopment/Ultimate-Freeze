@@ -1,0 +1,37 @@
+#Made by BGHDNetwork(Noodles)
+#Suport Discord: https://discord.gg/QbbXPNG
+#Version 0.1
+#Newest Changes: Release
+#Plugin Page:
+#=======================================================
+#Permssion: freeze.update
+Update:
+  Enabled: true
+#Enables if there is a message on-join when the plugin is outdated. 
+#=======================================================
+#Permssions:
+# /freeze or /ss - freeze.freeze
+# Notification when someone leaves when frozen - freeze.quitmessage
+#
+#freeze.override - Can't be frozen
+#=======================================================
+#Plugin Options (When Frozen)
+StopBlockBreak:
+  Enabled: true
+#If set to true, the player will not be able to break blocks when frozen.
+
+StopBlockPlace:
+  Enabled: true
+#If set to true, the player will not be able to place blocks when frozen.
+
+StopPlayerPVP:
+  Enabled: true
+#If set to true, the player will not be able to pvp when frozen.
+
+StopFoodLevelChange:
+  Enabled: true
+#If set to true, the player will not lose hunger when frozen.
+
+StopCommandUsage:
+  Enabled: true
+#If set to true, the player will not be able to use commands when frozen.
