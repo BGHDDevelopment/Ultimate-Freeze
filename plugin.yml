@@ -1,10 +1,8 @@
 main: me.noodles.ss.Main
-name: Freeze
-version: 2.2
-author: BGHDNetwork
+name: UltimateFreeze
+version: 0.4
+author: BGHDDevelopment
 commands:
    freeze:
       description: Freeze
       aliases: [ss]
-   freezebuyer:
-      description: Freeze Buyer Command

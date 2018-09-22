@@ -1,9 +1,17 @@
-#Pluign Messages:
+#Plugin Messages:
+
+
+#If UseGUI is set to false in the config.yml, this is the message that players see.
+Messages:
+  - '&5Hello'
+  - '&cYou must join ts in 5min!'
+  - '&cthe link is: ts.myserver.net'
+  - '&5you can put as many lines as you want'
 
 InvalidUsage: "&cUse Like: /freeze [Name] or /ss [Name]"
 NoPlayer: "&cThat player is offline!"
 NoFreeze: "&cYou can not freeze that player!"
-NoPermission: "(!) You don't have permission to use this command!"
+NoPermission: "&c(!) You don't have permission to use this command!"
 NoCommands: "&cYou can not use commands when frozen!"
 Frozen: "&cYou have been frozen!"
 UnFrozen: "&aYou have been unfrozen!"

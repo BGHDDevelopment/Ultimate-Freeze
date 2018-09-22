@@ -1,21 +1,30 @@
 #Made by BGHDNetwork(Noodles)
 #Suport Discord: https://discord.gg/QbbXPNG
-#Version 0.1
-#Newest Changes: Release
-#Plugin Page:
+#Version 0.3
+#Newest Changes: Cleaned up code
+#Plugin Page: https://www.spigotmc.org/resources/44518/
 #=======================================================
-#Permssion: freeze.update
+#Permssion: ultimatefreeze.update
 Update:
   Enabled: true
 #Enables if there is a message on-join when the plugin is outdated. 
 #=======================================================
 #Permssions:
-# /freeze or /ss - freeze.freeze
-# Notification when someone leaves when frozen - freeze.quitmessage
+# /freeze or /ss - ultimatefreeze.freeze
+# Notification when someone leaves when frozen - ultimatefreeze.quitmessage
 #
-#freeze.override - Can't be frozen
+#ultimatefreeze.override - Can't be frozen
+#=======================================================
+UseGUI:
+  Enabled: true
+#When set to true when the player is frozen they will see a GUI.
+#When set to false when the player is frozen they will see a chat message.
 #=======================================================
 #Plugin Options (When Frozen)
+GiveBlindness:
+  Enabled: true
+#If set to true, the player will be given blindness when frozen.
+
 StopBlockBreak:
   Enabled: true
 #If set to true, the player will not be able to break blocks when frozen.

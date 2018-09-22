@@ -5,8 +5,6 @@
 
 #Note: To use the GUI make sure the UseGUI option is true in the config.yml file.
 
-#GUI Title
-GUITitle: "&cYou are frozen, DO NOT LOG OUT!"
 
 #Surrounding items:
 GUISurroundingItem: "GLASS"
@@ -14,15 +12,10 @@ GUISurroundingName: "&c&lWARNING!"
 GUISurroundingLore:
   - '&cYou have been frozen!'
 
-#Sourroundin items:
+#Freeze Items:
 GUIFreezeItem: "PAPER"
 GUIFreezeName: "&c&lYou have been frozen!"
 GUIFreezeLore:
   - '&5Hello'
   - '&cYou must join ts in 5min!'
-  - '&cthe link is: ts.myserver.net'
-  - '&5you can put as many lines as you want'
-
-
-
-
+  - '&3the link is: ts.myserver.net'
