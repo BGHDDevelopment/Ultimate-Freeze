@@ -2,10 +2,7 @@
 #Please use this list for the item names: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
 #Note: This list is for 1.12 the plugin is based in 1.8! Only use blocks that you are running on your server!
 #=======================================================
-
 #Note: To use the GUI make sure the UseGUI option is true in the config.yml file.
-
-
 #Surrounding items:
 GUISurroundingItem: "GLASS"
 GUISurroundingName: "&c&lWARNING!"

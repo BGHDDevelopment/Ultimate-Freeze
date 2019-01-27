@@ -1,7 +1,6 @@
 #Made by BGHDNetwork(Noodles)
-#Suport Discord: https://discord.gg/QbbXPNG
-#Version 0.3
-#Newest Changes: Cleaned up code
+#Suport Discord: https://bghddevelopment.com/discord
+#Version 0.6
 #Plugin Page: https://www.spigotmc.org/resources/44518/
 #=======================================================
 #Permssion: ultimatefreeze.update
@@ -12,7 +11,6 @@ Update:
 #Permssions:
 # /freeze or /ss - ultimatefreeze.freeze
 # Notification when someone leaves when frozen - ultimatefreeze.quitmessage
-#
 #ultimatefreeze.override - Can't be frozen
 #=======================================================
 UseGUI:

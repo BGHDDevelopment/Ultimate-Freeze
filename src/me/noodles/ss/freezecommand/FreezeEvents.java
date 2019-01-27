@@ -171,6 +171,17 @@ public class FreezeEvents implements Listener {
                     e.setCancelled(true);
                     e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', Main.plugin.getmessagesConfig().getString("NoCommands")));
                 }
+                String message = e.getMessage();
+                String[] array = message.split(" ");
+                if(array[0].equalsIgnoreCase("/msg")) {
+                    e.setCancelled(false);
+                }
+                if(array[0].equalsIgnoreCase("/tell")) {
+                    e.setCancelled(false);
+                }
+                if(array[0].equalsIgnoreCase("/r")) {
+                    e.setCancelled(false);
+                }
             }
         }
 

@@ -1,7 +1,4 @@
 #Plugin Messages:
-
-
-#If UseGUI is set to false in the config.yml, this is the message that players see.
 Messages:
   - '&5Hello'
   - '&cYou must join ts in 5min!'
