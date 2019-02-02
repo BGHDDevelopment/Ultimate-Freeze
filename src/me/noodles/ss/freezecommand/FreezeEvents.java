@@ -165,22 +165,15 @@ public class FreezeEvents implements Listener {
 
         @EventHandler
         public void onCommand(final PlayerCommandPreprocessEvent e) {
-            if (Main.plugin.getConfig().getBoolean("StopCommandUsage.Enabled") == true) {
-                Player p = e.getPlayer();
+            if (Main.plugin.getConfig().getBoolean("StopCommandUsage.Enabled")) {
+                final Player p = e.getPlayer();
                 if (FreezeCommand.Freeze.contains(p.getName())) {
-                    e.setCancelled(true);
-                    e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', Main.plugin.getmessagesConfig().getString("NoCommands")));
-                }
-                String message = e.getMessage();
-                String[] array = message.split(" ");
-                if(array[0].equalsIgnoreCase("/msg")) {
-                    e.setCancelled(false);
-                }
-                if(array[0].equalsIgnoreCase("/tell")) {
-                    e.setCancelled(false);
-                }
-                if(array[0].equalsIgnoreCase("/r")) {
-                    e.setCancelled(false);
+                    final String message = e.getMessage();
+                    final String[] array = message.split(" ");
+                    if (!array[0].equalsIgnoreCase("/msg") && !array[0].equalsIgnoreCase("/tell") && !array[0].equalsIgnoreCase("/r") && !array[0].equalsIgnoreCase("/whisper") && !array[0].equalsIgnoreCase("/t") && !array[0].equalsIgnoreCase("/w")) {
+                        e.setCancelled(true);
+                        e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', Main.plugin.getmessagesConfig().getString("NoCommands")));
+                    }
                 }
             }
         }
