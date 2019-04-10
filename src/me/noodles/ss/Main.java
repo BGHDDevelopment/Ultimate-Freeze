@@ -24,30 +24,43 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         Main.plugin = this;
         PluginDescriptionFile VarUtilType = this.getDescription();
-        this.getLogger().info("Ultimate Freeze V" + VarUtilType.getVersion() + " loading commands...");
-        this.getLogger().info("Ultimate Freeze V" + VarUtilType.getVersion() + " loading config...");
-        this.getLogger().info("Ultimate Freeze V" + VarUtilType.getVersion() + " loading events...");
-        this.registerCommands();
-        this.createFiles();
+        Logger.log(Logger.LogLevel.OUTLINE,  "********************");
+        Logger.log(Logger.LogLevel.INFO, "Initializing Freeze Version: " + Settings.VERSION);
+        Logger.log(Logger.LogLevel.INFO, "Created by: " + Settings.DEVELOPER_NAME);
+        Logger.log(Logger.LogLevel.INFO, "Website: " + Settings.DEVELOPER_URL);
+        Logger.log(Logger.LogLevel.INFO, "Spigot Link: " + Settings.PLUGIN_URL);
+        Logger.log(Logger.LogLevel.INFO, "Support Link: " + Settings.SUPPORT_DISCORD_URL);
+        Logger.log(Logger.LogLevel.OUTLINE,  "********************");
+        Logger.log(Logger.LogLevel.INFO, "Plugin Loading...");
+        Logger.log(Logger.LogLevel.INFO, "Registering Managers...");
         MetricsLite metrics = new MetricsLite(this);
+        Logger.log(Logger.LogLevel.INFO, "Managers Registered!");
+        Logger.log(Logger.LogLevel.INFO, "Registering Listeners...");
         getServer().getPluginManager().registerEvents(new FreezeEvents(), this);
         getServer().getPluginManager().registerEvents(new JoinEvent(), this);
+        Logger.log(Logger.LogLevel.INFO, "Listeners Registered!");
+        Logger.log(Logger.LogLevel.INFO, "Registering Commands...");
+        this.registerCommands();
+        Logger.log(Logger.LogLevel.INFO, "Commands Registered!");
+        Logger.log(Logger.LogLevel.INFO, "Loading Config's...");
+        this.createFiles();
+        Logger.log(Logger.LogLevel.INFO, "Config's Registered!");
+        Logger.log(Logger.LogLevel.SUCCESS, "Freeze Version: " + Settings.VERSION + " Loaded.");
         setEnabled(true);
-        getLogger().info("Ultimate Freeze V" + VarUtilType.getVersion() + " started!");
-        this.getLogger().info("Ultimate Freeze V" + VarUtilType.getVersion() + " checking for updates...");
+        Logger.log(Logger.LogLevel.OUTLINE,  "********************");
+        Logger.log(Logger.LogLevel.INFO, "Checking for updates...");        this.checker = new UpdateChecker(this);
         this.checker = new UpdateChecker(this);
         if (this.checker.isConnected()) {
             if (this.checker.hasUpdate()) {
-                getServer().getConsoleSender().sendMessage("------------------------");
-                getServer().getConsoleSender().sendMessage("Ultimate Freeze is outdated!");
-                getServer().getConsoleSender().sendMessage("Newest version: " + this.checker.getLatestVersion());
-                getServer().getConsoleSender().sendMessage("Your version: " + Main.plugin.getDescription().getVersion());
-                getServer().getConsoleSender().sendMessage("Please Update Here: https://www.spigotmc.org/resources/44518/");
-                getServer().getConsoleSender().sendMessage("------------------------");
-            } else {
-                getServer().getConsoleSender().sendMessage("------------------------");
-                getServer().getConsoleSender().sendMessage("Ultimate Freeze is up to date!");
-                getServer().getConsoleSender().sendMessage("------------------------");
+                Logger.log(Logger.LogLevel.OUTLINE,  "********************");
+                Logger.log(Logger.LogLevel.WARNING,("Freeze is outdated!"));
+                Logger.log(Logger.LogLevel.WARNING,("Newest version: " + this.checker.getLatestVersion()));
+                Logger.log(Logger.LogLevel.WARNING,("Your version: " + Settings.VERSION));
+                Logger.log(Logger.LogLevel.WARNING,("Please Update Here: " + Settings.PLUGIN_URL));
+                Logger.log(Logger.LogLevel.OUTLINE,  "********************");
+            }
+            else {
+                Logger.log(Logger.LogLevel.SUCCESS, "Freeze is up to date!");
             }
         }
     }

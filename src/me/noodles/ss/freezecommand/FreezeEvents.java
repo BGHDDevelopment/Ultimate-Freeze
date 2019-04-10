@@ -1,6 +1,7 @@
 package me.noodles.ss.freezecommand;
 
 import me.noodles.ss.Main;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
@@ -221,17 +222,22 @@ public class FreezeEvents implements Listener {
 
 
 
-        @EventHandler
-        public void onQuit(PlayerQuitEvent e) {
-            Player p = e.getPlayer();
-            if (FreezeCommand.Freeze.contains(p.getName())) {
-                for (Player pl : Main.plugin.getServer().getOnlinePlayers()) {
-                    if (pl.hasPermission("ultimatefreeze.quitmessage")) {
-                        pl.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.plugin.getmessagesConfig().getString("PlayerLeft").replace("%target%", p.getName())));
+    @EventHandler
+    public void onQuit(PlayerQuitEvent e) {
+        Player p = e.getPlayer();
+        if (FreezeCommand.Freeze.contains(p.getName())) {
+            for (Player pl : Main.plugin.getServer().getOnlinePlayers()) {
+                if (pl.hasPermission("ultimatefreeze.quitmessage")) {
+                    pl.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.plugin.getmessagesConfig().getString("PlayerLeft").replace("%target%", p.getName())));
+                    if (Main.plugin.getConfig().getBoolean("BanOnLeave.Enabled") == true) {
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(),(Main.plugin.getConfig().getString("BanCommand").replace("%target%", p.getName())));
+                    } else {
+                        return;
                     }
                 }
             }
         }
+    }
 }
 
 

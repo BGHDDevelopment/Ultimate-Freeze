@@ -42,3 +42,11 @@ StopFoodLevelChange:
 StopCommandUsage:
   Enabled: true
 #If set to true, the player will not be able to use commands when frozen.
+
+BanOnLeave:
+  Enabled: false
+#If set to true, if a player leaves while frozen they will be banned.
+
+BanCommand: "ban %target% logging out while frozen"
+#Command run when a user logs out while frozen. BanOnLeave must be set to true.\
+#DO NOT PUT THE /
