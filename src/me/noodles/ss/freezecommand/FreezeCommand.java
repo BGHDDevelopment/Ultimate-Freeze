@@ -21,7 +21,6 @@ public class FreezeCommand implements CommandExecutor {
   public static ArrayList<String> Freeze;
 
     public FreezeCommand() {
-        this.freezeinv = Bukkit.createInventory(null, 27, ChatColor.RED + "You are frozen, DO NOT log out");
         this.Freeze = new ArrayList<>();
     }
 

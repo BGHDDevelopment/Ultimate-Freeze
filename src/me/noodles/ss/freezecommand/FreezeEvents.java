@@ -1,11 +1,14 @@
 package me.noodles.ss.freezecommand;
 
 import me.noodles.ss.Main;
+import me.noodles.ss.inv.InvCreator;
+import me.noodles.ss.inv.InvNames;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -14,6 +17,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
+import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -59,35 +64,19 @@ public class FreezeEvents implements Listener {
 
                 glass.setItemMeta(glassm);
                 paper.setItemMeta(paperm);
-                FreezeCommand.freezeinv.setItem(0, glass);
-                FreezeCommand.freezeinv.setItem(1, glass);
-                FreezeCommand.freezeinv.setItem(2, glass);
-                FreezeCommand.freezeinv.setItem(3, glass);
-                FreezeCommand.freezeinv.setItem(4, glass);
-                FreezeCommand.freezeinv.setItem(5, glass);
-                FreezeCommand.freezeinv.setItem(6, glass);
-                FreezeCommand.freezeinv.setItem(7, glass);
-                FreezeCommand.freezeinv.setItem(8, glass);
-                FreezeCommand.freezeinv.setItem(9, glass);
-                FreezeCommand.freezeinv.setItem(10, paper);
-                FreezeCommand.freezeinv.setItem(11, paper);
-                FreezeCommand.freezeinv.setItem(12, paper);
-                FreezeCommand.freezeinv.setItem(13, paper);
-                FreezeCommand.freezeinv.setItem(14, paper);
-                FreezeCommand.freezeinv.setItem(15, paper);
-                FreezeCommand.freezeinv.setItem(16, paper);
-                FreezeCommand.freezeinv.setItem(17, glass);
-                FreezeCommand.freezeinv.setItem(18, glass);
-                FreezeCommand.freezeinv.setItem(19, glass);
-                FreezeCommand.freezeinv.setItem(20, glass);
-                FreezeCommand.freezeinv.setItem(21, glass);
-                FreezeCommand.freezeinv.setItem(22, glass);
-                FreezeCommand.freezeinv.setItem(23, glass);
-                FreezeCommand.freezeinv.setItem(24, glass);
-                FreezeCommand.freezeinv.setItem(22, glass);
-                FreezeCommand.freezeinv.setItem(25, glass);
-                FreezeCommand.freezeinv.setItem(26, glass);
-                p.openInventory(FreezeCommand.freezeinv);
+                InvCreator.Main.setItem(10, paper);
+                InvCreator.Main.setItem(11, paper);
+                InvCreator.Main.setItem(12, paper);
+                InvCreator.Main.setItem(13, paper);
+                InvCreator.Main.setItem(14, paper);
+                InvCreator.Main.setItem(15, paper);
+                InvCreator.Main.setItem(16, paper);
+                for (int i = 0; i < 27; ++i) {
+                    if (InvCreator.Main.getItem(i) == null) {
+                        InvCreator.Main.setItem(i, glass);
+                    }
+                }
+                p.openInventory(InvCreator.Main);
             }
         }
     }
@@ -206,20 +195,26 @@ public class FreezeEvents implements Listener {
         }
 
 
-
         @EventHandler
         public void onClick(InventoryClickEvent e) {
-            if (e.getInventory().getTitle().equalsIgnoreCase(ChatColor.RED + "You are frozen, DO NOT log out")) {
+            if (e.getView().getTitle().equals(null)) {
+                return;
+            }
+            if (e.getView().getTitle().equals(InvNames.Main)) {
                 e.setCancelled(true);
-                if (e.getInventory().getTitle().equalsIgnoreCase(ChatColor.RED + "You are frozen, DO NOT log out")) {
-                    if (e.getCurrentItem() == null) {
-                        return;
-                    }
+            } else {
+                e.setCancelled(false);
+            }
+            if (e.getView().getTitle().equals(InvNames.Main)) {
+                if (e.getCurrentItem() == null) {
+                    return;
+                }
+                if (e.isRightClick() || e.isLeftClick()) {
+                    e.setCancelled(true);
+
                 }
             }
-
         }
-
 
 
     @EventHandler
