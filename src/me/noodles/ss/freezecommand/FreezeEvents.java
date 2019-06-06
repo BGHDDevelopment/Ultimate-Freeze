@@ -199,19 +199,20 @@ public class FreezeEvents implements Listener {
             }
             if (e.getView().getTitle().equals(InvNames.Main)) {
                 e.setCancelled(true);
-            } else {
-                e.setCancelled(false);
             }
             if (e.getView().getTitle().equals(InvNames.Main)) {
                 if (e.getCurrentItem() == null) {
-                    return;
-                }
-                if (e.isRightClick() || e.isLeftClick()) {
-                    e.setCancelled(true);
+                        return;
+                    }
+                if (e.getView().getTitle().equals(InvNames.Main)) {
 
+                    if (e.isRightClick() || e.isLeftClick()) {
+                        e.setCancelled(true);
+
+                    }
                 }
             }
-        }
+    }
 
 
     @EventHandler

@@ -1,6 +1,6 @@
 main: me.noodles.ss.Main
 name: UltimateFreeze
-version: 1.2
+version: 1.3
 author: BGHDDevelopment
 commands:
    freeze:
