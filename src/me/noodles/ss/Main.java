@@ -16,13 +16,12 @@ public class Main extends JavaPlugin {
 
     public static Main plugin;
     private UpdateChecker checker;
-    public static Main getPlugin() {
-        return (Main)JavaPlugin.getPlugin((Class)Main.class);
-    }
+    private static Plugin instance;
 
 
     public void onEnable() {
         Main.plugin = this;
+        instance = this;
         PluginDescriptionFile VarUtilType = this.getDescription();
         Logger.log(Logger.LogLevel.OUTLINE,  "********************");
         Logger.log(Logger.LogLevel.INFO, "Initializing Freeze Version: " + Settings.VERSION);
@@ -48,27 +47,32 @@ public class Main extends JavaPlugin {
         Logger.log(Logger.LogLevel.SUCCESS, "Freeze Version: " + Settings.VERSION + " Loaded.");
         setEnabled(true);
         Logger.log(Logger.LogLevel.OUTLINE,  "********************");
-        Logger.log(Logger.LogLevel.INFO, "Checking for updates...");        this.checker = new UpdateChecker(this);
-        this.checker = new UpdateChecker(this);
-        if (this.checker.isConnected()) {
-            if (this.checker.hasUpdate()) {
-                Logger.log(Logger.LogLevel.OUTLINE,  "********************");
-                Logger.log(Logger.LogLevel.WARNING,("Freeze is outdated!"));
-                Logger.log(Logger.LogLevel.WARNING,("Newest version: " + this.checker.getLatestVersion()));
+        Logger.log(Logger.LogLevel.INFO, "Checking for updates...");
+        new UpdateChecker(this, 44518).getLatestVersion(version -> {
+            if (this.getDescription().getVersion().equalsIgnoreCase(version)) {
+                Logger.log(Logger.LogLevel.SUCCESS,("UltimateFreeze is up to date!"));
+            } else {
+                Logger.log(Logger.LogLevel.OUTLINE,  "*********************************************************************");
+                Logger.log(Logger.LogLevel.WARNING,("UltimateFreeze is outdated!"));
+                Logger.log(Logger.LogLevel.WARNING,("Newest version: " + version));
                 Logger.log(Logger.LogLevel.WARNING,("Your version: " + Settings.VERSION));
                 Logger.log(Logger.LogLevel.WARNING,("Please Update Here: " + Settings.PLUGIN_URL));
-                Logger.log(Logger.LogLevel.OUTLINE,  "********************");
-            }
-            else {
-                Logger.log(Logger.LogLevel.SUCCESS, "Freeze is up to date!");
-            }
-        }
+                Logger.log(Logger.LogLevel.OUTLINE,  "*********************************************************************");			}
+        });
     }
 
     public void registerCommands() {
         this.getCommand("freeze").setExecutor(new FreezeCommand());
 
     }
+
+    public static Plugin getInstance() {
+        return instance;
+    }
+    public static Main getPlugin() {
+        return (Main)JavaPlugin.getPlugin((Class)Main.class);
+    }
+
 
     private File configf, configmessages2, configgui2;
     private FileConfiguration config, configmessages, configgui;
