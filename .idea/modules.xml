@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ScreenShare Freeze.iml" filepath="$PROJECT_DIR$/ScreenShare Freeze.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ss.iml" filepath="$PROJECT_DIR$/ss.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ultimate-Freeze.iml" filepath="$PROJECT_DIR$/Ultimate-Freeze.iml" />
     </modules>
   </component>
 </project>
