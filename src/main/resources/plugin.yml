@@ -5,3 +5,7 @@ prefix: UltimateFreeze
 authors: [BGHDDevelopment]
 description: Freeze players and display a message you set in the config!
 website: bghddevelopment.com
+commands:
+  freeze:
+    description: Freeze
+    aliases: [ss]
