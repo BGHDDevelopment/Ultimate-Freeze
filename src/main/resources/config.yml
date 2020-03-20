@@ -5,7 +5,7 @@
 #Permssion: ultimatefreeze.update
 Update:
   Enabled: true
-#Enables if there is a message on-join when the plugin is outdated. 
+#Enables if there is a message on-join when the plugin is outdated.
 #=======================================================
 #Permssions:
 # /freeze or /ss - ultimatefreeze.freeze
@@ -43,9 +43,9 @@ StopCommandUsage:
 #If set to true, the player will not be able to use commands when frozen.
 
 BanOnLeave:
-  #  Enabled: false
-  ##If set to true, if a player leaves while frozen they will be banned.
-  #
-  #BanCommand: "ban %target% logging out while frozen"
+#  Enabled: false
+##If set to true, if a player leaves while frozen they will be banned.
+#
+#BanCommand: "ban %target% logging out while frozen"
 ##Command run when a user logs out while frozen. BanOnLeave must be set to true.\
 ##DO NOT PUT THE /

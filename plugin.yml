@@ -1,8 +1,0 @@
-main: me.noodles.ss.Main
-name: UltimateFreeze
-version: 1.4
-author: BGHDDevelopment
-commands:
-   freeze:
-      description: Freeze
-      aliases: [ss]
