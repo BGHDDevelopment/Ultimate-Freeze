@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Ultimate-Freeze.iml" filepath="$PROJECT_DIR$/Ultimate-Freeze.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ss.iml" filepath="$PROJECT_DIR$/ss.iml" />
     </modules>
   </component>
 </project>

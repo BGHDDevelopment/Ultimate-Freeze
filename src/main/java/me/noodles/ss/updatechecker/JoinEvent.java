@@ -15,16 +15,20 @@ public class JoinEvent implements Listener
         Player p = e.getPlayer();
         if (Main.plugin.getConfig().getBoolean("Update.Enabled") == true) {
             if (p.hasPermission("ultimatefreeze.update")) {
-                new UpdateChecker(Main.getPlugin(), 44518).getLatestVersion(version -> {
-                    if (!Main.getInstance().getDescription().getVersion().equalsIgnoreCase(version)) {
-                        p.sendMessage(ChatColor.GRAY + "****************************************************************");
-                        p.sendMessage(ChatColor.RED + "UltimateFreeze is outdated!");
-                        p.sendMessage(ChatColor.RED + "Newest version: " + version);
-                        p.sendMessage(ChatColor.RED + "Your version: " + ChatColor.BOLD + Settings.VERSION);
-                        p.sendMessage(ChatColor.GOLD + "Please Update Here: " + ChatColor.ITALIC + Settings.PLUGIN_URL);
-                        p.sendMessage(ChatColor.GRAY + "****************************************************************");
-                    }
-                });
+                if (Main.plugin.getConfig().getBoolean("CheckForUpdates.Enabled")) {
+                    new UpdateChecker(Main.getPlugin(), 44518).getLatestVersion(version -> {
+                        if (!Main.getInstance().getDescription().getVersion().equalsIgnoreCase(version)) {
+                            p.sendMessage(ChatColor.GRAY + "****************************************************************");
+                            p.sendMessage(ChatColor.RED + "UltimateFreeze is outdated!");
+                            p.sendMessage(ChatColor.RED + "Newest version: " + version);
+                            p.sendMessage(ChatColor.RED + "Your version: " + ChatColor.BOLD + Settings.VERSION);
+                            p.sendMessage(ChatColor.GOLD + "Please Update Here: " + ChatColor.ITALIC + Settings.PLUGIN_URL);
+                            p.sendMessage(ChatColor.GRAY + "****************************************************************");
+                        }
+                    });
+                } else {
+                    p.sendMessage(ChatColor.RED + "[UltimateFreeze] You disabled checking for updates in the config.yml but did not toggle update notifications!");
+                }
             }
         }
     }

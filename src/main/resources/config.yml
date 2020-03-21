@@ -7,6 +7,14 @@ Update:
   Enabled: true
 #Enables if there is a message on-join when the plugin is outdated.
 #=======================================================
+CheckForUpdates:
+  Enabled: true
+#Enables a message in console if the plugin is outdated.
+#=======================================================
+SilentStart:
+  Enabled: false
+#Removes startup messages.
+#=======================================================
 #Permssions:
 # /freeze or /ss - ultimatefreeze.freeze
 # Notification when someone leaves when frozen - ultimatefreeze.quitmessage
