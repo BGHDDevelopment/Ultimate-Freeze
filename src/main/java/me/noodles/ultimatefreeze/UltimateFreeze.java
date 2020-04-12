@@ -7,12 +7,16 @@ import me.noodles.ultimatefreeze.updatechecker.UpdateChecker;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 public class UltimateFreeze extends JavaPlugin {
 
@@ -20,6 +24,7 @@ public class UltimateFreeze extends JavaPlugin {
     private UpdateChecker checker;
     private static Plugin instance;
 
+    private final Set<UUID> frozen = new HashSet<>();
 
     public void onEnable() {
         this.createFiles();
@@ -94,6 +99,18 @@ public class UltimateFreeze extends JavaPlugin {
     public void registerCommands() {
         this.getCommand("freeze").setExecutor(new FreezeCommand());
 
+    }
+
+    public final boolean isUserFrozen(final Player player) {
+        return frozen.contains(player.getUniqueId());
+    }
+
+    public void addFrozenUser(final Player player) {
+        frozen.add(player.getUniqueId());
+    }
+
+    public void removeFrozenUser(final Player player) {
+        frozen.remove(player.getUniqueId());
     }
 
     public static Plugin getInstance() {

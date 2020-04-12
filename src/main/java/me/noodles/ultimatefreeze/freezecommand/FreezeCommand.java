@@ -15,14 +15,7 @@ import java.util.ArrayList;
 
 public class FreezeCommand implements CommandExecutor {
 
-
     static Inventory freezeinv;
-  public static ArrayList<String> Freeze;
-
-    public FreezeCommand() {
-        this.Freeze = new ArrayList<>();
-    }
-
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (command.getName().equalsIgnoreCase("freeze")) {
@@ -40,8 +33,8 @@ public class FreezeCommand implements CommandExecutor {
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', UltimateFreeze.plugin.getmessagesConfig().getString("NoFreeze")));
                         return true;
 
-                    } else if (!this.Freeze.contains(target.getName())) {
-                        this.Freeze.add(target.getName());
+                    } else if (!UltimateFreeze.getPlugin().isUserFrozen(target)) {
+                        UltimateFreeze.getPlugin().addFrozenUser(target);
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', UltimateFreeze.plugin.getmessagesConfig().getString("PlayerFrozen").replace("%target%", target.getName())));
                         target.sendMessage(ChatColor.translateAlternateColorCodes('&', UltimateFreeze.plugin.getmessagesConfig().getString("Frozen")));
                         if (UltimateFreeze.plugin.getConfig().getBoolean("GiveBlindness.Enabled") == true) {
@@ -55,7 +48,7 @@ public class FreezeCommand implements CommandExecutor {
                             for (PotionEffect pe : target.getActivePotionEffects()) {
                                 target.removePotionEffect(pe.getType());
                                 target.closeInventory();
-                                this.Freeze.remove(target.getName());
+                                UltimateFreeze.getPlugin().removeFrozenUser(target);
                             }
                         }
                     }

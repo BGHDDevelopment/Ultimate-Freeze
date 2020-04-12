@@ -36,7 +36,7 @@ public class FreezeEvents implements Listener {
     @EventHandler
     public void onMove(final PlayerMoveEvent e) {
         Player p = e.getPlayer();
-        if (FreezeCommand.Freeze.contains(p.getName())) {
+        if (UltimateFreeze.getPlugin().isUserFrozen(p)) {
             p.teleport(e.getFrom());
             if (UltimateFreeze.plugin.getConfig().getBoolean("UseGUI.Enabled") == true) {
 
@@ -82,7 +82,7 @@ public class FreezeEvents implements Listener {
     public void onMove2(final PlayerMoveEvent e) {
         Player p = e.getPlayer();
         if (UltimateFreeze.plugin.getConfig().getBoolean("UseGUI.Enabled") == false) {
-            if (FreezeCommand.Freeze.contains(p.getName())) {
+            if (UltimateFreeze.getPlugin().isUserFrozen(p)) {
                 p.teleport(e.getFrom());
                 for (String msg : UltimateFreeze.plugin.getmessagesConfig().getStringList("Messages")) {
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
@@ -95,7 +95,7 @@ public class FreezeEvents implements Listener {
         public void onBlockBreak(BlockBreakEvent e) {
             if (UltimateFreeze.plugin.getConfig().getBoolean("StopBlockBreak.Enabled") == true) {
                 Player p = e.getPlayer();
-                if (FreezeCommand.Freeze.contains(p.getName())) {
+                if (UltimateFreeze.getPlugin().isUserFrozen(p)) {
                     e.setCancelled(true);
                 }
             }
@@ -106,7 +106,7 @@ public class FreezeEvents implements Listener {
         public void onBlockPlace(BlockPlaceEvent e) {
             if (UltimateFreeze.plugin.getConfig().getBoolean("StopBlockPlace.Enabled") == true) {
                 Player p = e.getPlayer();
-                if (FreezeCommand.Freeze.contains(p.getName())) {
+                if (UltimateFreeze.getPlugin().isUserFrozen(p)) {
                     e.setCancelled(true);
                 }
             }
@@ -115,8 +115,11 @@ public class FreezeEvents implements Listener {
         @EventHandler
         public void onPlayerDamage(EntityDamageEvent e) {
             if (UltimateFreeze.plugin.getConfig().getBoolean("StopPlayerPVP.Enabled") == true) {
-                if (FreezeCommand.Freeze.contains(e.getEntity())) {
-                    e.setCancelled(true);
+                if (e.getEntity() instanceof  Player) {
+                    Player p = (Player) e.getEntity();
+                    if (UltimateFreeze.getPlugin().isUserFrozen(p)) {
+                        e.setCancelled(true);
+                    }
                 }
             }
         }
@@ -127,7 +130,7 @@ public class FreezeEvents implements Listener {
                 if (e.getDamager() instanceof Player) {
                     if (e.getEntity() instanceof Player) {
                         Player p = (Player) e.getEntity();
-                        if (FreezeCommand.Freeze.contains(p.getName())) {
+                        if (UltimateFreeze.getPlugin().isUserFrozen(p)) {
                             e.setCancelled(true);
                         }
                     }
@@ -142,7 +145,7 @@ public class FreezeEvents implements Listener {
                 if(e.getDamager() instanceof Arrow) {
                     if (e.getEntity() instanceof Player) {
                         Player p = (Player) e.getEntity();
-                        if (FreezeCommand.Freeze.contains(p.getName())) {
+                        if (UltimateFreeze.getPlugin().isUserFrozen(p)) {
                             e.setCancelled(true);
                         }
                     }
@@ -154,7 +157,7 @@ public class FreezeEvents implements Listener {
         public void onCommand(final PlayerCommandPreprocessEvent e) {
             if (UltimateFreeze.plugin.getConfig().getBoolean("StopCommandUsage.Enabled")) {
                 final Player p = e.getPlayer();
-                if (FreezeCommand.Freeze.contains(p.getName())) {
+                if (UltimateFreeze.getPlugin().isUserFrozen(p)) {
                     final String message = e.getMessage();
                     final String[] array = message.split(" ");
                     if (!array[0].equalsIgnoreCase("/msg") && !array[0].equalsIgnoreCase("/tell") && !array[0].equalsIgnoreCase("/r") && !array[0].equalsIgnoreCase("/whisper") && !array[0].equalsIgnoreCase("/t") && !array[0].equalsIgnoreCase("/w")) {
@@ -170,7 +173,7 @@ public class FreezeEvents implements Listener {
             if (UltimateFreeze.plugin.getConfig().getBoolean("StopFoodLevelChange.Enabled") == true) {
                 if (e.getEntity() instanceof Player) {
                     Player p = (Player) e.getEntity();
-                    if (FreezeCommand.Freeze.contains(p.getName())) {
+                    if (UltimateFreeze.getPlugin().isUserFrozen(p)) {
                         e.setCancelled(true);
                     }
                 }
@@ -183,7 +186,7 @@ public class FreezeEvents implements Listener {
                 if (e.getDamager() instanceof Player) {
                     if (e.getEntity() instanceof Player) {
                         Player p = (Player) e.getDamager();
-                        if (FreezeCommand.Freeze.contains(p.getName())) {
+                        if (UltimateFreeze.getPlugin().isUserFrozen(p)) {
                             e.setCancelled(true);
                         }
                     }
@@ -218,7 +221,7 @@ public class FreezeEvents implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         Player p = e.getPlayer();
-        if (FreezeCommand.Freeze.contains(p.getName())) {
+        if (UltimateFreeze.getPlugin().isUserFrozen(p)) {
             for (Player pl : UltimateFreeze.plugin.getServer().getOnlinePlayers()) {
                 if (pl.hasPermission("ultimatefreeze.quitmessage")) {
                     pl.sendMessage(ChatColor.translateAlternateColorCodes('&', UltimateFreeze.plugin.getmessagesConfig().getString("PlayerLeft").replace("%target%", p.getName())));
