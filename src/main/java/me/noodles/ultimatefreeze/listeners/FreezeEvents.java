@@ -3,6 +3,7 @@ package me.noodles.ultimatefreeze.listeners;
 import me.noodles.ultimatefreeze.UltimateFreeze;
 import me.noodles.ultimatefreeze.inv.InvCreator;
 import me.noodles.ultimatefreeze.inv.InvNames;
+import me.noodles.ultimatefreeze.utilities.Common;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -28,11 +29,6 @@ import java.util.stream.IntStream;
 
 public class FreezeEvents implements Listener {
 
-    private static String getColor(String msg) {
-        return ChatColor.translateAlternateColorCodes('&', msg);
-    }
-
-
     @EventHandler
     public void onMove(final PlayerMoveEvent e) {
         Player p = e.getPlayer();
@@ -44,19 +40,19 @@ public class FreezeEvents implements Listener {
                 ItemStack glass = new ItemStack(Material.getMaterial(UltimateFreeze.plugin.getguiConfig().getString("GUISurroundingItem")));
                 ItemMeta paperm = paper.getItemMeta();
                 ItemMeta glassm = glass.getItemMeta();
-                glassm.setDisplayName(ChatColor.translateAlternateColorCodes('&', UltimateFreeze.plugin.getguiConfig().getString("GUISurroundingName")));
+                glassm.setDisplayName(Common.translate(UltimateFreeze.plugin.getguiConfig().getString("GUISurroundingName")));
                 glass.setItemMeta(glassm);
-                paperm.setDisplayName(ChatColor.translateAlternateColorCodes('&', UltimateFreeze.plugin.getguiConfig().getString("GUIFreezeName")));
+                paperm.setDisplayName(Common.translate(UltimateFreeze.plugin.getguiConfig().getString("GUIFreezeName")));
 
 
                 ArrayList<String> papermlore = new ArrayList<>();
                 List<String> stringList = UltimateFreeze.plugin.getguiConfig().getStringList("GUIFreezeLore");
-                IntStream.range(0, stringList.size()).forEach(i -> papermlore.add(getColor(stringList.get(i))));
+                IntStream.range(0, stringList.size()).forEach(i -> papermlore.add(Common.translate(stringList.get(i))));
                 paperm.setLore(papermlore);
 
                 ArrayList<String> glassmlore = new ArrayList<>();
                 List<String> stringList2 = UltimateFreeze.plugin.getguiConfig().getStringList("GUISurroundingLore");
-                IntStream.range(0, stringList2.size()).forEach(i -> glassmlore.add(getColor(stringList2.get(i))));
+                IntStream.range(0, stringList2.size()).forEach(i -> glassmlore.add(Common.translate(stringList2.get(i))));
                 glassm.setLore(glassmlore);
 
                 glass.setItemMeta(glassm);
@@ -85,7 +81,7 @@ public class FreezeEvents implements Listener {
             if (UltimateFreeze.getPlugin().isUserFrozen(p)) {
                 p.teleport(e.getFrom());
                 for (String msg : UltimateFreeze.plugin.getmessagesConfig().getStringList("Messages")) {
-                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
+                    Common.tell(p, msg);
                 }
             }
         }
@@ -162,7 +158,7 @@ public class FreezeEvents implements Listener {
                     final String[] array = message.split(" ");
                     if (!array[0].equalsIgnoreCase("/msg") && !array[0].equalsIgnoreCase("/tell") && !array[0].equalsIgnoreCase("/r") && !array[0].equalsIgnoreCase("/whisper") && !array[0].equalsIgnoreCase("/t") && !array[0].equalsIgnoreCase("/w")) {
                         e.setCancelled(true);
-                        e.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', UltimateFreeze.plugin.getmessagesConfig().getString("NoCommands")));
+                        Common.tell(e.getPlayer(), UltimateFreeze.plugin.getmessagesConfig().getString("NoCommands"));
                     }
                 }
             }
@@ -224,9 +220,9 @@ public class FreezeEvents implements Listener {
         if (UltimateFreeze.getPlugin().isUserFrozen(p)) {
             for (Player pl : UltimateFreeze.plugin.getServer().getOnlinePlayers()) {
                 if (pl.hasPermission("ultimatefreeze.quitmessage")) {
-                    pl.sendMessage(ChatColor.translateAlternateColorCodes('&', UltimateFreeze.plugin.getmessagesConfig().getString("PlayerLeft").replace("%target%", p.getName())));
+                    Common.tell(pl, UltimateFreeze.plugin.getmessagesConfig().getString("PlayerLeft").replace("%target%", p.getName()));
                     if (UltimateFreeze.plugin.getConfig().getBoolean("BanOnLeave.Enabled") == true) {
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(),(UltimateFreeze.plugin.getConfig().getString("BanCommand").replace("%target%", p.getName())));
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), (UltimateFreeze.plugin.getConfig().getString("BanCommand").replace("%target%", p.getName())));
                     } else {
                         return;
                     }

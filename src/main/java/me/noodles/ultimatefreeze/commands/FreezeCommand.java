@@ -1,6 +1,7 @@
 package me.noodles.ultimatefreeze.commands;
 
 import me.noodles.ultimatefreeze.UltimateFreeze;
+import me.noodles.ultimatefreeze.utilities.Common;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -15,35 +16,33 @@ import java.util.ArrayList;
 
 public class FreezeCommand implements CommandExecutor {
 
-    static Inventory freezeinv;
-
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (command.getName().equalsIgnoreCase("freeze")) {
             if (sender.hasPermission("ultimatefreeze.freeze")) {
                 if (args.length == 0)
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', UltimateFreeze.plugin.getmessagesConfig().getString("InvalidUsage")));
+                    Common.tell(sender, UltimateFreeze.plugin.getmessagesConfig().getString("InvalidUsage"));
 
                 if (args.length == 1) {
                     Player target = Bukkit.getPlayer(args[0]);
                     if (target == null) {
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', UltimateFreeze.plugin.getmessagesConfig().getString("NoPlayer")));
+                        Common.tell(sender, UltimateFreeze.plugin.getmessagesConfig().getString("NoPlayer"));
                         return true;
                     }
                     if (target.hasPermission("ultimatefreeze.override")) {
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', UltimateFreeze.plugin.getmessagesConfig().getString("NoFreeze")));
+                        Common.tell(sender, UltimateFreeze.plugin.getmessagesConfig().getString("NoFreeze"));
                         return true;
 
                     } else if (!UltimateFreeze.getPlugin().isUserFrozen(target)) {
                         UltimateFreeze.getPlugin().addFrozenUser(target);
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', UltimateFreeze.plugin.getmessagesConfig().getString("PlayerFrozen").replace("%target%", target.getName())));
-                        target.sendMessage(ChatColor.translateAlternateColorCodes('&', UltimateFreeze.plugin.getmessagesConfig().getString("Frozen")));
+                        Common.tell(sender, UltimateFreeze.plugin.getmessagesConfig().getString("PlayerFrozen").replace("%target%", target.getName()));
+                        Common.tell(target, UltimateFreeze.plugin.getmessagesConfig().getString("Frozen"));
                         if (UltimateFreeze.plugin.getConfig().getBoolean("GiveBlindness.Enabled") == true) {
                             target.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 10000000, 0));
                         }
 
                         } else {
-                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', UltimateFreeze.plugin.getmessagesConfig().getString("PlayerUnFrozen").replace("%target%", target.getName())));
-                            target.sendMessage(ChatColor.translateAlternateColorCodes('&', UltimateFreeze.plugin.getmessagesConfig().getString("UnFrozen")));
+                            Common.tell(sender, UltimateFreeze.plugin.getmessagesConfig().getString("PlayerUnFrozen").replace("%target%", target.getName()));
+                            Common.tell(target, UltimateFreeze.plugin.getmessagesConfig().getString("UnFrozen"));
                             target.getActivePotionEffects().clear();
                             for (PotionEffect pe : target.getActivePotionEffects()) {
                                 target.removePotionEffect(pe.getType());
@@ -53,7 +52,7 @@ public class FreezeCommand implements CommandExecutor {
                         }
                     }
                 } else {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', UltimateFreeze.plugin.getmessagesConfig().getString("NoPermission")));
+                    Common.tell(sender, UltimateFreeze.plugin.getmessagesConfig().getString("NoPermission"));
                 }
 
         }
