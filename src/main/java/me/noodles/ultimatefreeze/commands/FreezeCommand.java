@@ -1,20 +1,28 @@
 package me.noodles.ultimatefreeze.commands;
 
+import com.google.common.collect.ImmutableList;
 import me.noodles.ultimatefreeze.UltimateFreeze;
 import me.noodles.ultimatefreeze.utilities.Common;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class FreezeCommand implements CommandExecutor {
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class FreezeCommand implements TabExecutor {
+    private final String PERMISSION = "ultimatefreeze.freeze";
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (command.getName().equalsIgnoreCase("freeze")) {
-            if (sender.hasPermission("ultimatefreeze.freeze")) {
+            if (sender.hasPermission(PERMISSION)) {
                 if (args.length == 0)
                     Common.tell(sender, UltimateFreeze.plugin.getmessagesConfig().getString("InvalidUsage"));
 
@@ -54,6 +62,11 @@ public class FreezeCommand implements CommandExecutor {
         }
 
         return false;
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        return (args.length == 1 && sender.hasPermission(PERMISSION)) ? null : Collections.emptyList();
     }
 
 }
