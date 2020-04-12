@@ -1,4 +1,4 @@
-package me.noodles.ss.inv;
+package me.noodles.ultimatefreeze.inv;
 
 import org.bukkit.ChatColor;
 

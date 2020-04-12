@@ -1,4 +1,4 @@
-package me.noodles.ss;
+package me.noodles.ultimatefreeze;
 
 public class Settings {
 

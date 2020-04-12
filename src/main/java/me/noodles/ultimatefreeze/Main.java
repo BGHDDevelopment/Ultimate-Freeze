@@ -1,9 +1,9 @@
-package me.noodles.ss;
+package me.noodles.ultimatefreeze;
 
-import me.noodles.ss.freezecommand.FreezeCommand;
-import me.noodles.ss.freezecommand.FreezeEvents;
-import me.noodles.ss.updatechecker.JoinEvent;
-import me.noodles.ss.updatechecker.UpdateChecker;
+import me.noodles.ultimatefreeze.freezecommand.FreezeCommand;
+import me.noodles.ultimatefreeze.freezecommand.FreezeEvents;
+import me.noodles.ultimatefreeze.updatechecker.JoinEvent;
+import me.noodles.ultimatefreeze.updatechecker.UpdateChecker;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

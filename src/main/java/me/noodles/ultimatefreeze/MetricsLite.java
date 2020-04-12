@@ -1,4 +1,4 @@
-package me.noodles.ss;
+package me.noodles.ultimatefreeze;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;

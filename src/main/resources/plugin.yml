@@ -1,6 +1,6 @@
 name: UltimateFreeze
 version: ${project.version}
-main: me.noodles.ss.Main
+main: me.noodles.ultimatefreeze.Main
 prefix: UltimateFreeze
 authors: [BGHDDevelopment]
 description: Freeze players and display a message you set in the config!

@@ -1,6 +1,6 @@
-package me.noodles.ss.updatechecker;
+package me.noodles.ultimatefreeze.updatechecker;
 
-import me.noodles.ss.Main;
+import me.noodles.ultimatefreeze.Main;
 import org.bukkit.Bukkit;
 
 import java.net.*;

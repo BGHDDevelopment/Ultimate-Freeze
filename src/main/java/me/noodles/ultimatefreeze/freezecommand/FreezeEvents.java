@@ -1,8 +1,8 @@
-package me.noodles.ss.freezecommand;
+package me.noodles.ultimatefreeze.freezecommand;
 
-import me.noodles.ss.Main;
-import me.noodles.ss.inv.InvCreator;
-import me.noodles.ss.inv.InvNames;
+import me.noodles.ultimatefreeze.Main;
+import me.noodles.ultimatefreeze.inv.InvCreator;
+import me.noodles.ultimatefreeze.inv.InvNames;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
