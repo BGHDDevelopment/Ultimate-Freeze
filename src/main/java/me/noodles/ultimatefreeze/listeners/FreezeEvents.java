@@ -9,6 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -23,16 +24,27 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.IntStream;
 
 public class FreezeEvents implements Listener {
 
+    @EventHandler(priority = EventPriority.LOW)
+    public void onMoveLow(final PlayerMoveEvent event) {
+        final Player player = event.getPlayer();
+
+        if (UltimateFreeze.getPlugin().isUserFrozen(player)) {
+            if (!player.getLocation().equals(event.getFrom()) && !player.isFlying()) {
+                player.teleport(event.getFrom());
+            }
+        }
+    }
+
     @EventHandler
     public void onMove(final PlayerMoveEvent e) {
         Player p = e.getPlayer();
         if (UltimateFreeze.getPlugin().isUserFrozen(p)) {
-            p.teleport(e.getFrom());
             if (UltimateFreeze.plugin.getConfig().getBoolean("UseGUI.Enabled") == true) {
 
                 ItemStack paper = new ItemStack(Material.getMaterial(UltimateFreeze.plugin.getguiConfig().getString("GUIFreezeItem")));
@@ -78,7 +90,6 @@ public class FreezeEvents implements Listener {
         Player p = e.getPlayer();
         if (UltimateFreeze.plugin.getConfig().getBoolean("UseGUI.Enabled") == false) {
             if (UltimateFreeze.getPlugin().isUserFrozen(p)) {
-                p.teleport(e.getFrom());
                 for (String msg : UltimateFreeze.plugin.getmessagesConfig().getStringList("Messages")) {
                     Common.tell(p, msg);
                 }
