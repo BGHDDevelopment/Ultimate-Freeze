@@ -1,6 +1,6 @@
 package me.noodles.ultimatefreeze.updatechecker;
 
-import me.noodles.ultimatefreeze.Main;
+import me.noodles.ultimatefreeze.UltimateFreeze;
 import org.bukkit.Bukkit;
 
 import java.net.*;
@@ -10,10 +10,10 @@ import java.util.function.Consumer;
 
 public class UpdateChecker
 {
-    private Main plugin;
+    private UltimateFreeze plugin;
     private int resourceId;
 
-    public UpdateChecker(Main plugin, int resourceId) {
+    public UpdateChecker(UltimateFreeze plugin, int resourceId) {
         this.plugin = plugin;
         this.resourceId = resourceId;
     }

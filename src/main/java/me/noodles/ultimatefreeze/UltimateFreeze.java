@@ -14,9 +14,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.io.IOException;
 
-public class Main extends JavaPlugin {
+public class UltimateFreeze extends JavaPlugin {
 
-    public static Main plugin;
+    public static UltimateFreeze plugin;
     private UpdateChecker checker;
     private static Plugin instance;
 
@@ -24,7 +24,7 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         this.createFiles();
         if (getConfig().getBoolean("SilentStart.Enabled")) {
-            Main.plugin = this;
+            UltimateFreeze.plugin = this;
             instance = this;
             PluginDescriptionFile VarUtilType = this.getDescription();
             MetricsLite metrics = new MetricsLite(this);
@@ -48,7 +48,7 @@ public class Main extends JavaPlugin {
                 });
             }
         } else {
-            Main.plugin = this;
+            UltimateFreeze.plugin = this;
             instance = this;
             PluginDescriptionFile VarUtilType = this.getDescription();
             Logger.log(Logger.LogLevel.OUTLINE, "*********************************************************************");
@@ -100,8 +100,8 @@ public class Main extends JavaPlugin {
         return instance;
     }
 
-    public static Main getPlugin() {
-        return (Main) JavaPlugin.getPlugin((Class) Main.class);
+    public static UltimateFreeze getPlugin() {
+        return (UltimateFreeze) JavaPlugin.getPlugin((Class) UltimateFreeze.class);
     }
 
 

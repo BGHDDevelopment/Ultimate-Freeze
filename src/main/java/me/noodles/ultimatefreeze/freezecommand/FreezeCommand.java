@@ -1,6 +1,6 @@
 package me.noodles.ultimatefreeze.freezecommand;
 
-import me.noodles.ultimatefreeze.Main;
+import me.noodles.ultimatefreeze.UltimateFreeze;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -28,29 +28,29 @@ public class FreezeCommand implements CommandExecutor {
         if (command.getName().equalsIgnoreCase("freeze")) {
             if (sender.hasPermission("ultimatefreeze.freeze")) {
                 if (args.length == 0)
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.plugin.getmessagesConfig().getString("InvalidUsage")));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', UltimateFreeze.plugin.getmessagesConfig().getString("InvalidUsage")));
 
                 if (args.length == 1) {
                     Player target = Bukkit.getPlayer(args[0]);
                     if (target == null) {
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.plugin.getmessagesConfig().getString("NoPlayer")));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', UltimateFreeze.plugin.getmessagesConfig().getString("NoPlayer")));
                         return true;
                     }
                     if (target.hasPermission("ultimatefreeze.override")) {
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.plugin.getmessagesConfig().getString("NoFreeze")));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', UltimateFreeze.plugin.getmessagesConfig().getString("NoFreeze")));
                         return true;
 
                     } else if (!this.Freeze.contains(target.getName())) {
                         this.Freeze.add(target.getName());
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.plugin.getmessagesConfig().getString("PlayerFrozen").replace("%target%", target.getName())));
-                        target.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.plugin.getmessagesConfig().getString("Frozen")));
-                        if (Main.plugin.getConfig().getBoolean("GiveBlindness.Enabled") == true) {
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', UltimateFreeze.plugin.getmessagesConfig().getString("PlayerFrozen").replace("%target%", target.getName())));
+                        target.sendMessage(ChatColor.translateAlternateColorCodes('&', UltimateFreeze.plugin.getmessagesConfig().getString("Frozen")));
+                        if (UltimateFreeze.plugin.getConfig().getBoolean("GiveBlindness.Enabled") == true) {
                             target.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 10000000, 0));
                         }
 
                         } else {
-                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.plugin.getmessagesConfig().getString("PlayerUnFrozen").replace("%target%", target.getName())));
-                            target.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.plugin.getmessagesConfig().getString("UnFrozen")));
+                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', UltimateFreeze.plugin.getmessagesConfig().getString("PlayerUnFrozen").replace("%target%", target.getName())));
+                            target.sendMessage(ChatColor.translateAlternateColorCodes('&', UltimateFreeze.plugin.getmessagesConfig().getString("UnFrozen")));
                             target.getActivePotionEffects().clear();
                             for (PotionEffect pe : target.getActivePotionEffects()) {
                                 target.removePotionEffect(pe.getType());
@@ -60,7 +60,7 @@ public class FreezeCommand implements CommandExecutor {
                         }
                     }
                 } else {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.plugin.getmessagesConfig().getString("NoPermission")));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', UltimateFreeze.plugin.getmessagesConfig().getString("NoPermission")));
                 }
 
         }
