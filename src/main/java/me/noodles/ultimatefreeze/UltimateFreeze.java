@@ -2,8 +2,11 @@ package me.noodles.ultimatefreeze;
 
 import me.noodles.ultimatefreeze.commands.FreezeCommand;
 import me.noodles.ultimatefreeze.listeners.FreezeEvents;
-import me.noodles.ultimatefreeze.updatechecker.JoinEvent;
-import me.noodles.ultimatefreeze.updatechecker.UpdateChecker;
+import me.noodles.ultimatefreeze.utilities.Logger;
+import me.noodles.ultimatefreeze.utilities.MetricsLite;
+import me.noodles.ultimatefreeze.utilities.Settings;
+import me.noodles.ultimatefreeze.utilities.updatechecker.JoinEvent;
+import me.noodles.ultimatefreeze.utilities.updatechecker.UpdateChecker;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

@@ -1,7 +1,7 @@
-package me.noodles.ultimatefreeze.updatechecker;
+package me.noodles.ultimatefreeze.utilities.updatechecker;
 
 import me.noodles.ultimatefreeze.UltimateFreeze;
-import me.noodles.ultimatefreeze.Settings;
+import me.noodles.ultimatefreeze.utilities.Settings;
 import org.bukkit.event.player.*;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.*;

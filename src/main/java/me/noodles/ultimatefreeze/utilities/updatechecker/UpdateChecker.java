@@ -1,4 +1,4 @@
-package me.noodles.ultimatefreeze.updatechecker;
+package me.noodles.ultimatefreeze.utilities.updatechecker;
 
 import me.noodles.ultimatefreeze.UltimateFreeze;
 import org.bukkit.Bukkit;
