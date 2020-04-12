@@ -1,4 +1,4 @@
-package me.noodles.ultimatefreeze.freezecommand;
+package me.noodles.ultimatefreeze.commands;
 
 import me.noodles.ultimatefreeze.UltimateFreeze;
 import net.md_5.bungee.api.ChatColor;

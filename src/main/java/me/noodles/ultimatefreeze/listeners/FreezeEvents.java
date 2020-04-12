@@ -1,4 +1,4 @@
-package me.noodles.ultimatefreeze.freezecommand;
+package me.noodles.ultimatefreeze.listeners;
 
 import me.noodles.ultimatefreeze.UltimateFreeze;
 import me.noodles.ultimatefreeze.inv.InvCreator;

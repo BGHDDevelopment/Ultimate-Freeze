@@ -1,7 +1,7 @@
 package me.noodles.ultimatefreeze;
 
-import me.noodles.ultimatefreeze.freezecommand.FreezeCommand;
-import me.noodles.ultimatefreeze.freezecommand.FreezeEvents;
+import me.noodles.ultimatefreeze.commands.FreezeCommand;
+import me.noodles.ultimatefreeze.listeners.FreezeEvents;
 import me.noodles.ultimatefreeze.updatechecker.JoinEvent;
 import me.noodles.ultimatefreeze.updatechecker.UpdateChecker;
 import org.bukkit.configuration.InvalidConfigurationException;
