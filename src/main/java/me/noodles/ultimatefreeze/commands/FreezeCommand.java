@@ -2,17 +2,13 @@ package me.noodles.ultimatefreeze.commands;
 
 import me.noodles.ultimatefreeze.UltimateFreeze;
 import me.noodles.ultimatefreeze.utilities.Common;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import java.util.ArrayList;
-
 
 public class FreezeCommand implements CommandExecutor {
 
@@ -56,6 +52,8 @@ public class FreezeCommand implements CommandExecutor {
                 }
 
         }
+
         return false;
     }
+
 }

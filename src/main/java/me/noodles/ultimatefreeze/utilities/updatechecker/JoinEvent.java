@@ -7,8 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.*;
 import org.bukkit.event.*;
 
-public class JoinEvent implements Listener
-{
+public class JoinEvent implements Listener {
 
     @EventHandler
     public void onJoin(final PlayerJoinEvent e) {
@@ -43,5 +42,5 @@ public class JoinEvent implements Listener
             p.sendMessage(" ");
         }
     }
+
 }
-    

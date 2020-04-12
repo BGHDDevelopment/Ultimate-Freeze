@@ -101,7 +101,6 @@ public class UltimateFreeze extends JavaPlugin {
 
     public void registerCommands() {
         this.getCommand("freeze").setExecutor(new FreezeCommand());
-
     }
 
     public final boolean isUserFrozen(final Player player) {
@@ -124,7 +123,6 @@ public class UltimateFreeze extends JavaPlugin {
         return (UltimateFreeze) JavaPlugin.getPlugin((Class) UltimateFreeze.class);
     }
 
-
     private File configf, configmessages2, configgui2;
     private FileConfiguration config, configmessages, configgui;
 
@@ -145,17 +143,21 @@ public class UltimateFreeze extends JavaPlugin {
             configf.getParentFile().mkdirs();
             saveResource("config.yml", false);
         }
+
         if (!configmessages2.exists()) {
             configmessages2.getParentFile().mkdirs();
             saveResource("messages.yml", false);
         }
+
         if (!configgui2.exists()) {
             configgui2.getParentFile().mkdirs();
             saveResource("gui.yml", false);
         }
+
         config = new YamlConfiguration();
         configmessages = new YamlConfiguration();
         configgui = new YamlConfiguration();
+
         try {
             config.load(configf);
             configmessages.load(configmessages2);
