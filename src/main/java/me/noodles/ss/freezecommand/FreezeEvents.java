@@ -3,8 +3,10 @@ package me.noodles.ss.freezecommand;
 import me.noodles.ss.Main;
 import me.noodles.ss.inv.InvCreator;
 import me.noodles.ss.inv.InvNames;
+import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
@@ -28,68 +30,68 @@ import java.util.stream.IntStream;
 
 public class FreezeEvents implements Listener {
 
-    private static String getColor(String msg) {
-        return ChatColor.translateAlternateColorCodes('&', msg);
-    }
-
-
-    @EventHandler
-    public void onMove(final PlayerMoveEvent e) {
-        Player p = e.getPlayer();
-        if (FreezeCommand.Freeze.contains(p.getName())) {
-            p.teleport(e.getFrom());
-            if (Main.plugin.getConfig().getBoolean("UseGUI.Enabled") == true) {
-
-                ItemStack paper = new ItemStack(Material.getMaterial(Main.plugin.getguiConfig().getString("GUIFreezeItem")));
-                ItemStack glass = new ItemStack(Material.getMaterial(Main.plugin.getguiConfig().getString("GUISurroundingItem")));
-                ItemMeta paperm = paper.getItemMeta();
-                ItemMeta glassm = glass.getItemMeta();
-                glassm.setDisplayName(ChatColor.translateAlternateColorCodes('&', Main.plugin.getguiConfig().getString("GUISurroundingName")));
-                glass.setItemMeta(glassm);
-                paperm.setDisplayName(ChatColor.translateAlternateColorCodes('&', Main.plugin.getguiConfig().getString("GUIFreezeName")));
-
-
-                ArrayList<String> papermlore = new ArrayList<>();
-                List<String> stringList = Main.plugin.getguiConfig().getStringList("GUIFreezeLore");
-                IntStream.range(0, stringList.size()).forEach(i -> papermlore.add(getColor(stringList.get(i))));
-                paperm.setLore(papermlore);
-
-                ArrayList<String> glassmlore = new ArrayList<>();
-                List<String> stringList2 = Main.plugin.getguiConfig().getStringList("GUISurroundingLore");
-                IntStream.range(0, stringList2.size()).forEach(i -> glassmlore.add(getColor(stringList2.get(i))));
-                glassm.setLore(glassmlore);
-
-                glass.setItemMeta(glassm);
-                paper.setItemMeta(paperm);
-                InvCreator.Main.setItem(10, paper);
-                InvCreator.Main.setItem(11, paper);
-                InvCreator.Main.setItem(12, paper);
-                InvCreator.Main.setItem(13, paper);
-                InvCreator.Main.setItem(14, paper);
-                InvCreator.Main.setItem(15, paper);
-                InvCreator.Main.setItem(16, paper);
-                for (int i = 0; i < 27; ++i) {
-                    if (InvCreator.Main.getItem(i) == null) {
-                        InvCreator.Main.setItem(i, glass);
-                    }
-                }
-                p.openInventory(InvCreator.Main);
-            }
+        private static String getColor(String msg) {
+            return ChatColor.translateAlternateColorCodes('&', msg);
         }
-    }
 
-    @EventHandler
-    public void onMove2(final PlayerMoveEvent e) {
-        Player p = e.getPlayer();
-        if (Main.plugin.getConfig().getBoolean("UseGUI.Enabled") == false) {
+
+        @EventHandler
+        public void onMove(final PlayerMoveEvent e) {
+            Player p = e.getPlayer();
             if (FreezeCommand.Freeze.contains(p.getName())) {
                 p.teleport(e.getFrom());
-                for (String msg : Main.plugin.getmessagesConfig().getStringList("Messages")) {
-                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
+                if (Main.plugin.getConfig().getBoolean("UseGUI.Enabled") == true) {
+
+                    ItemStack paper = new ItemStack(Material.getMaterial(Main.plugin.getguiConfig().getString("GUIFreezeItem")));
+                    ItemStack glass = new ItemStack(Material.getMaterial(Main.plugin.getguiConfig().getString("GUISurroundingItem")));
+                    ItemMeta paperm = paper.getItemMeta();
+                    ItemMeta glassm = glass.getItemMeta();
+                    glassm.setDisplayName(ChatColor.translateAlternateColorCodes('&', Main.plugin.getguiConfig().getString("GUISurroundingName")));
+                    glass.setItemMeta(glassm);
+                    paperm.setDisplayName(ChatColor.translateAlternateColorCodes('&', Main.plugin.getguiConfig().getString("GUIFreezeName")));
+
+
+                    ArrayList<String> papermlore = new ArrayList<>();
+                    List<String> stringList = Main.plugin.getguiConfig().getStringList("GUIFreezeLore");
+                    IntStream.range(0, stringList.size()).forEach(i -> papermlore.add(getColor(stringList.get(i))));
+                    paperm.setLore(papermlore);
+
+                    ArrayList<String> glassmlore = new ArrayList<>();
+                    List<String> stringList2 = Main.plugin.getguiConfig().getStringList("GUISurroundingLore");
+                    IntStream.range(0, stringList2.size()).forEach(i -> glassmlore.add(getColor(stringList2.get(i))));
+                    glassm.setLore(glassmlore);
+
+                    glass.setItemMeta(glassm);
+                    paper.setItemMeta(paperm);
+                    InvCreator.Main.setItem(10, paper);
+                    InvCreator.Main.setItem(11, paper);
+                    InvCreator.Main.setItem(12, paper);
+                    InvCreator.Main.setItem(13, paper);
+                    InvCreator.Main.setItem(14, paper);
+                    InvCreator.Main.setItem(15, paper);
+                    InvCreator.Main.setItem(16, paper);
+                    for (int i = 0; i < 27; ++i) {
+                        if (InvCreator.Main.getItem(i) == null) {
+                            InvCreator.Main.setItem(i, glass);
+                        }
+                    }
+                    p.openInventory(InvCreator.Main);
                 }
             }
         }
-    }
+
+        @EventHandler
+        public void onMove2(final PlayerMoveEvent e) {
+            Player p = e.getPlayer();
+            if (Main.plugin.getConfig().getBoolean("UseGUI.Enabled") == false) {
+                if (FreezeCommand.Freeze.contains(p.getName())) {
+                    p.teleport(e.getFrom());
+                    for (String msg : Main.plugin.getmessagesConfig().getStringList("Messages")) {
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
+                    }
+                }
+            }
+        }
 
         @EventHandler
         public void onBlockBreak(BlockBreakEvent e) {
@@ -212,7 +214,7 @@ public class FreezeEvents implements Listener {
                     }
                 }
             }
-    }
+        }
 
 
     @EventHandler
@@ -221,7 +223,13 @@ public class FreezeEvents implements Listener {
         if (FreezeCommand.Freeze.contains(p.getName())) {
             for (Player pl : Main.plugin.getServer().getOnlinePlayers()) {
                 if (pl.hasPermission("ultimatefreeze.quitmessage")) {
-                    pl.sendMessage(ChatColor.translateAlternateColorCodes('&', Main.plugin.getmessagesConfig().getString("PlayerLeft").replace("%target%", p.getName())));
+                    TextComponent startMsg = new TextComponent(ChatColor.translateAlternateColorCodes('&', Main.plugin.getmessagesConfig().getString("PlayerLeft").replace("%target%", p.getName())));
+
+                    TextComponent banMsg = new TextComponent(ChatColor.translateAlternateColorCodes('&', Main.plugin.getmessagesConfig().getString("PlayerLeftBanMessage").replace("%target%", p.getName())));
+                    banMsg.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, Main.plugin.getmessagesConfig().getString("BanCommand").replace("%target%", p.getName())));
+
+                    startMsg.addExtra(banMsg);
+                    pl.spigot().sendMessage(startMsg);
                     if (Main.plugin.getConfig().getBoolean("BanOnLeave.Enabled") == true) {
                         Bukkit.dispatchCommand(Bukkit.getConsoleSender(),(Main.plugin.getConfig().getString("BanCommand").replace("%target%", p.getName())));
                     } else {
@@ -232,5 +240,3 @@ public class FreezeEvents implements Listener {
         }
     }
 }
-
-

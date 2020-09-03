@@ -11,4 +11,3 @@ public class InvNames {
         InvNames.Main = new StringBuilder().append(ChatColor.RED).append(ChatColor.BOLD).append("FROZEN").toString();
     }
 }
-	
