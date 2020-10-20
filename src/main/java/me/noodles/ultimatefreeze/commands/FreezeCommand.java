@@ -28,6 +28,10 @@ public class FreezeCommand implements TabExecutor {
                         Common.tell(sender, UltimateFreeze.plugin.getmessagesConfig().getString("NoPlayer"));
                         return true;
                     }
+                    if (target.equals(sender)) {
+                        Common.tell(sender, UltimateFreeze.plugin.getmessagesConfig().getString("SelfFreeze"));
+                        return true;
+                    }
                     if (target.hasPermission("ultimatefreeze.override")) {
                         Common.tell(sender, UltimateFreeze.plugin.getmessagesConfig().getString("NoFreeze"));
                         return true;
