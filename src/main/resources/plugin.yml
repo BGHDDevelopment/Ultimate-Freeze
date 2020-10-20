@@ -9,3 +9,6 @@ commands:
   freeze:
     description: Freeze
     aliases: [ss]
+  "freezereload":
+    description: Reload Freeze config
+    aliases: ["ssreload"]

@@ -1,6 +1,7 @@
 package me.noodles.ultimatefreeze;
 
 import me.noodles.ultimatefreeze.commands.FreezeCommand;
+import me.noodles.ultimatefreeze.commands.ReloadCommand;
 import me.noodles.ultimatefreeze.listeners.FreezeEvents;
 import me.noodles.ultimatefreeze.utilities.Logger;
 import me.noodles.ultimatefreeze.utilities.MetricsLite;
@@ -100,6 +101,7 @@ public class UltimateFreeze extends JavaPlugin {
     }
 
     public void registerCommands() {
+        this.getCommand("freezereload").setExecutor(new ReloadCommand());
         this.getCommand("freeze").setExecutor(new FreezeCommand());
     }
 
@@ -162,6 +164,16 @@ public class UltimateFreeze extends JavaPlugin {
             config.load(configf);
             configmessages.load(configmessages2);
             configgui.load(configgui2);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void reloadConfigFiles() {
+        try {
+            config.load(new File(getDataFolder(), "config.yml"));
+            configmessages.load(new File(getDataFolder(), "messages.yml"));
+            configgui.load(new File(getDataFolder(), "gui.yml"));
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
