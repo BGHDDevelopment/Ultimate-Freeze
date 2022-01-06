@@ -1,30 +1,39 @@
-package me.noodles.ss;
+package me.noodles.ultimatefreeze;
 
-import me.noodles.ss.freezecommand.FreezeCommand;
-import me.noodles.ss.freezecommand.FreezeEvents;
-import me.noodles.ss.updatechecker.JoinEvent;
-import me.noodles.ss.updatechecker.UpdateChecker;
+import me.noodles.ultimatefreeze.commands.FreezeCommand;
+import me.noodles.ultimatefreeze.commands.ReloadCommand;
+import me.noodles.ultimatefreeze.listeners.FreezeEvents;
+import me.noodles.ultimatefreeze.utilities.Logger;
+import me.noodles.ultimatefreeze.utilities.MetricsLite;
+import me.noodles.ultimatefreeze.utilities.Settings;
+import me.noodles.ultimatefreeze.utilities.updatechecker.JoinEvent;
+import me.noodles.ultimatefreeze.utilities.updatechecker.UpdateChecker;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
-public class Main extends JavaPlugin {
+public class UltimateFreeze extends JavaPlugin {
 
-    public static Main plugin;
+    public static UltimateFreeze plugin;
     private UpdateChecker checker;
     private static Plugin instance;
 
+    private final Set<UUID> frozen = new HashSet<>();
 
     public void onEnable() {
         this.createFiles();
         if (getConfig().getBoolean("SilentStart.Enabled")) {
-            Main.plugin = this;
+            UltimateFreeze.plugin = this;
             instance = this;
             PluginDescriptionFile VarUtilType = this.getDescription();
             MetricsLite metrics = new MetricsLite(this);
@@ -48,7 +57,7 @@ public class Main extends JavaPlugin {
                 });
             }
         } else {
-            Main.plugin = this;
+            UltimateFreeze.plugin = this;
             instance = this;
             PluginDescriptionFile VarUtilType = this.getDescription();
             Logger.log(Logger.LogLevel.OUTLINE, "*********************************************************************");
@@ -92,18 +101,29 @@ public class Main extends JavaPlugin {
     }
 
     public void registerCommands() {
+        this.getCommand("freezereload").setExecutor(new ReloadCommand());
         this.getCommand("freeze").setExecutor(new FreezeCommand());
+    }
 
+    public final boolean isUserFrozen(final Player player) {
+        return frozen.contains(player.getUniqueId());
+    }
+
+    public void addFrozenUser(final Player player) {
+        frozen.add(player.getUniqueId());
+    }
+
+    public void removeFrozenUser(final Player player) {
+        frozen.remove(player.getUniqueId());
     }
 
     public static Plugin getInstance() {
         return instance;
     }
 
-    public static Main getPlugin() {
-        return (Main) JavaPlugin.getPlugin((Class) Main.class);
+    public static UltimateFreeze getPlugin() {
+        return (UltimateFreeze) JavaPlugin.getPlugin((Class) UltimateFreeze.class);
     }
-
 
     private File configf, configmessages2, configgui2;
     private FileConfiguration config, configmessages, configgui;
@@ -125,21 +145,35 @@ public class Main extends JavaPlugin {
             configf.getParentFile().mkdirs();
             saveResource("config.yml", false);
         }
+
         if (!configmessages2.exists()) {
             configmessages2.getParentFile().mkdirs();
             saveResource("messages.yml", false);
         }
+
         if (!configgui2.exists()) {
             configgui2.getParentFile().mkdirs();
             saveResource("gui.yml", false);
         }
+
         config = new YamlConfiguration();
         configmessages = new YamlConfiguration();
         configgui = new YamlConfiguration();
+
         try {
             config.load(configf);
             configmessages.load(configmessages2);
             configgui.load(configgui2);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void reloadConfigFiles() {
+        try {
+            config.load(new File(getDataFolder(), "config.yml"));
+            configmessages.load(new File(getDataFolder(), "messages.yml"));
+            configgui.load(new File(getDataFolder(), "gui.yml"));
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }

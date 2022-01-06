@@ -1,4 +1,4 @@
-package me.noodles.ss;
+package me.noodles.ultimatefreeze.utilities;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -27,5 +27,5 @@ public class Logger {
     }
 
     public enum LogLevel { ERROR, WARNING, INFO, SUCCESS, OUTLINE }
-}
 
+}

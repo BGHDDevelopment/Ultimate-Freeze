@@ -1,23 +1,22 @@
-package me.noodles.ss.updatechecker;
+package me.noodles.ultimatefreeze.utilities.updatechecker;
 
-import me.noodles.ss.Main;
-import me.noodles.ss.Settings;
+import me.noodles.ultimatefreeze.UltimateFreeze;
+import me.noodles.ultimatefreeze.utilities.Settings;
 import org.bukkit.event.player.*;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.*;
 import org.bukkit.event.*;
 
-public class JoinEvent implements Listener
-{
+public class JoinEvent implements Listener {
 
     @EventHandler
     public void onJoin(final PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        if (Main.plugin.getConfig().getBoolean("Update.Enabled") == true) {
+        if (UltimateFreeze.plugin.getConfig().getBoolean("Update.Enabled") == true) {
             if (p.hasPermission("ultimatefreeze.update")) {
-                if (Main.plugin.getConfig().getBoolean("CheckForUpdates.Enabled")) {
-                    new UpdateChecker(Main.getPlugin(), 44518).getLatestVersion(version -> {
-                        if (!Main.getInstance().getDescription().getVersion().equalsIgnoreCase(version)) {
+                if (UltimateFreeze.plugin.getConfig().getBoolean("CheckForUpdates.Enabled")) {
+                    new UpdateChecker(UltimateFreeze.getPlugin(), 44518).getLatestVersion(version -> {
+                        if (!UltimateFreeze.getInstance().getDescription().getVersion().equalsIgnoreCase(version)) {
                             p.sendMessage(ChatColor.GRAY + "****************************************************************");
                             p.sendMessage(ChatColor.RED + "UltimateFreeze is outdated!");
                             p.sendMessage(ChatColor.RED + "Newest version: " + version);
@@ -43,5 +42,5 @@ public class JoinEvent implements Listener
             p.sendMessage(" ");
         }
     }
+
 }
-    

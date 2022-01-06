@@ -1,6 +1,6 @@
-package me.noodles.ss.updatechecker;
+package me.noodles.ultimatefreeze.utilities.updatechecker;
 
-import me.noodles.ss.Main;
+import me.noodles.ultimatefreeze.UltimateFreeze;
 import org.bukkit.Bukkit;
 
 import java.net.*;
@@ -8,12 +8,11 @@ import java.io.*;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
-public class UpdateChecker
-{
-    private Main plugin;
-    private int resourceId;
+public class UpdateChecker {
+    private final UltimateFreeze plugin;
+    private final int resourceId;
 
-    public UpdateChecker(Main plugin, int resourceId) {
+    public UpdateChecker(UltimateFreeze plugin, int resourceId) {
         this.plugin = plugin;
         this.resourceId = resourceId;
     }
@@ -29,4 +28,5 @@ public class UpdateChecker
             }
         });
     }
+
 }
